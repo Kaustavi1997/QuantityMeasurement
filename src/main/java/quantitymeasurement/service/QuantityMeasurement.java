@@ -1,4 +1,4 @@
-package quantitymeasurement;
+package quantitymeasurement.service;
 
 public class QuantityMeasurement {
     public double feetToInch(double feet) {
