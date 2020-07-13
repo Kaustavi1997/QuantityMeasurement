@@ -53,4 +53,9 @@ public class QuantityMeasurementTest {
         double result = quantityMeasurement.feetToYard(3);
         Assert.assertEquals(1,result,0.1);
     }
+    @Test
+    public void givenFeet_ShouldNotReturnYard() {
+        double result = quantityMeasurement.feetToYard(1.0);
+        Assert.assertNotEquals(1.0,result,0.0);
+    }
 }
