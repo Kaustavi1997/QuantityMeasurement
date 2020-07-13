@@ -5,7 +5,8 @@ public class QuantityMeasurement {
     public double feetToInch(double feet) {
         return feet*FEET_TO_INCH_CONVERTER;
     }
-    public double feet(double feet){
-        return feet;
+    public double InchToFeet(double inch) {
+        return inch/FEET_TO_INCH_CONVERTER;
     }
+
 }
