@@ -48,4 +48,9 @@ public class QuantityMeasurementTest {
         double result = quantityMeasurement.InchToFeet(36);
         Assert.assertEquals(3,result,0.0);
     }
+    @Test
+    public void givenFeet_ShouldReturnYard() {
+        double result = quantityMeasurement.feetToYard(3);
+        Assert.assertEquals(1,result,0.1);
+    }
 }
