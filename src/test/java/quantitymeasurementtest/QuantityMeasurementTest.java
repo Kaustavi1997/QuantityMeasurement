@@ -43,4 +43,9 @@ public class QuantityMeasurementTest {
             System.out.println("null value provided");
         }
     }
+    @Test
+    public void givenInch_ShouldReturnFeet() {
+        double result = quantityMeasurement.InchToFeet(36);
+        Assert.assertEquals(3,result,0.0);
+    }
 }
