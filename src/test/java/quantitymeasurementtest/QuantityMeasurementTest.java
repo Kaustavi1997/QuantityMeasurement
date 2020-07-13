@@ -69,9 +69,9 @@ public class QuantityMeasurementTest {
         Assert.assertEquals(36.0,result,0.0);
     }
     @Test
-    public void givenInch_ShouldReturnYard() {
-        double result = quantityMeasurement.inchToYard(36);
-        Assert.assertEquals(0.972,result,0.0);
+    public void givenYard_ShouldReturnFeet() {
+        double result = quantityMeasurement.yardToFeet(1);
+        Assert.assertEquals(3,result,0.0);
     }
 
 }
