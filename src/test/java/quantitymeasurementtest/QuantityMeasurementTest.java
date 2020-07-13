@@ -35,4 +35,12 @@ public class QuantityMeasurementTest {
         Inch inch = new Inch(0.0);
         Assert.assertEquals(inch,new Inch(0.0));
     }
+    @Test
+    public void whenNullForInch_ShouldCheck(){
+        try {
+            Inch inch = new Inch(null);
+        }catch(NullPointerException e){
+            System.out.println("null value provided");
+        }
+    }
 }
