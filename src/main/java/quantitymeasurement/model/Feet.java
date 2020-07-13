@@ -2,11 +2,9 @@ package quantitymeasurement.model;
 
 public class Feet {
     double feet;
-
-    public Feet(double feet){
+    public Feet(Double feet) {
         this.feet = feet;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,9 +1,9 @@
 package quantitymeasurementtest;
-import exception.QuantityMeasurementException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import quantitymeasurement.model.Feet;
+import quantitymeasurement.model.Inch;
 import quantitymeasurement.service.QuantityMeasurement;
 
 public class QuantityMeasurementTest {
@@ -23,11 +23,16 @@ public class QuantityMeasurementTest {
         Assert.assertEquals(feet,new Feet(0.0));
     }
     @Test
-    public void whenNull_ShouldCheck(){
+    public void whenNullForFeet_ShouldCheck(){
         try {
             Feet feet = new Feet(null);
         }catch(NullPointerException e){
             System.out.println("null value provided");
         }
+    }
+    @Test
+    public void whenGivenTwoInchValue_ifEqual_shouldReturnTrue() {
+        Inch inch = new Inch(0.0);
+        Assert.assertEquals(inch,new Inch(0.0));
     }
 }
