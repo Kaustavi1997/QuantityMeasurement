@@ -63,4 +63,9 @@ public class QuantityMeasurementTest {
         double result = quantityMeasurement.inchToYard(1.0);
         Assert.assertNotEquals(1.0,result,0.0);
     }
+    @Test
+    public void givenYard_ShouldReturnInch() {
+        double result = quantityMeasurement.yardToInch(1.0);
+        Assert.assertEquals(36.0,result,0.0);
+    }
 }
