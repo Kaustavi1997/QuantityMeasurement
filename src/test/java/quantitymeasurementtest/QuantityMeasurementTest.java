@@ -54,8 +54,13 @@ public class QuantityMeasurementTest {
         Assert.assertEquals(1,result,0.1);
     }
     @Test
-    public void givenFeet_ShouldNotReturnYard() {
+    public void givenFeet_NotEqualToYard() {
         double result = quantityMeasurement.feetToYard(1.0);
+        Assert.assertNotEquals(1.0,result,0.0);
+    }
+    @Test
+    public void givenInch_NotEqualToYard() {
+        double result = quantityMeasurement.inchToYard(1.0);
         Assert.assertNotEquals(1.0,result,0.0);
     }
 }
