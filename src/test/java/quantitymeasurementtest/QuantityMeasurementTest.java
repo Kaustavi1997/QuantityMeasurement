@@ -2,6 +2,7 @@ package quantitymeasurementtest;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import quantitymeasurement.exception.QuantityMeasurementException;
 import quantitymeasurement.model.Feet;
 import quantitymeasurement.model.Inch;
 import quantitymeasurement.service.QuantityMeasurement;
@@ -14,7 +15,7 @@ public class QuantityMeasurementTest {
         quantityMeasurement = new QuantityMeasurement();
     }
     @Test
-    public void givenFeet_ShouldReturnInch() {
+    public void givenFeet_ShouldReturnInch() throws QuantityMeasurementException {
         double result = quantityMeasurement.converter(2.5, UnitConverterFactor.FEET_TO_INCH);
         Assert.assertEquals(30,result,0.0);
     }
@@ -26,9 +27,9 @@ public class QuantityMeasurementTest {
     @Test
     public void whenNullForFeet_ShouldCheck(){
         try {
-            Feet feet = new Feet(null);
-        }catch(NullPointerException e){
-            System.out.println("null value provided");
+            double result = quantityMeasurement.converter(null, UnitConverterFactor.FEET_TO_INCH);
+        }catch(QuantityMeasurementException e){
+            System.out.println(e.getMessage());;
         }
     }
     @Test
@@ -39,39 +40,39 @@ public class QuantityMeasurementTest {
     @Test
     public void whenNullForInch_ShouldCheck(){
         try {
-            Inch inch = new Inch(null);
-        }catch(NullPointerException e){
-            System.out.println("null value provided");
+            double result = quantityMeasurement.converter(null, UnitConverterFactor.INCH_TO_FEET);
+        }catch(QuantityMeasurementException e){
+            System.out.println(e.getMessage());;
         }
     }
     @Test
-    public void givenInch_ShouldReturnFeet() {
-        double result = quantityMeasurement.converter(36, UnitConverterFactor.INCH_TO_FEET);
+    public void givenInch_ShouldReturnFeet() throws QuantityMeasurementException {
+        double result = quantityMeasurement.converter(36.0, UnitConverterFactor.INCH_TO_FEET);
         Assert.assertEquals(2.988,result,0.0);
     }
     @Test
-    public void givenFeet_ShouldReturnYard() {
-        double result = quantityMeasurement.converter(3, UnitConverterFactor.FEET_TO_YARD);
+    public void givenFeet_ShouldReturnYard() throws QuantityMeasurementException {
+        double result = quantityMeasurement.converter(3.0, UnitConverterFactor.FEET_TO_YARD);
         Assert.assertEquals(1,result,0.1);
     }
     @Test
-    public void givenFeet_NotEqualToYard() {
+    public void givenFeet_NotEqualToYard() throws QuantityMeasurementException {
         double result = quantityMeasurement.converter(1.0, UnitConverterFactor.FEET_TO_YARD);
         Assert.assertNotEquals(1.0,result,0.0);
     }
     @Test
-    public void givenInch_NotEqualToYard() {
+    public void givenInch_NotEqualToYard() throws QuantityMeasurementException {
         double result = quantityMeasurement.converter(1.0, UnitConverterFactor.INCH_TO_YARD);
         Assert.assertNotEquals(1.0,result,0.0);
     }
     @Test
-    public void givenYard_ShouldReturnInch() {
+    public void givenYard_ShouldReturnInch() throws QuantityMeasurementException {
         double result = quantityMeasurement.converter(1.0, UnitConverterFactor.YARD_TO_INCH);
         Assert.assertEquals(36.0,result,0.0);
     }
     @Test
-    public void givenYard_ShouldReturnFeet() {
-        double result = quantityMeasurement.converter(1, UnitConverterFactor.YARD_TO_FEET);
+    public void givenYard_ShouldReturnFeet() throws QuantityMeasurementException {
+        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.YARD_TO_FEET);
         Assert.assertEquals(3,result,0.0);
     }
 
