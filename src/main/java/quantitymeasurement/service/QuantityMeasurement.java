@@ -1,7 +1,8 @@
 package quantitymeasurement.service;
 
 public class QuantityMeasurement {
+    private final int FEET_TO_INCH_CONVERTER = 12;
     public double feetToInch(double feet) {
-        return feet*12;
+        return feet*FEET_TO_INCH_CONVERTER;
     }
 }
