@@ -108,4 +108,9 @@ public class QuantityMeasurementTest {
             System.out.println(e.getMessage());;
         }
     }
+    @Test
+    public void givenInch_ShouldReturnCm() throws QuantityMeasurementException {
+        double result = quantityMeasurement.converter(2.0, UnitConverterFactor.INCH_TO_CM);
+        Assert.assertEquals(5.0,result,0.0);
+    }
 }
