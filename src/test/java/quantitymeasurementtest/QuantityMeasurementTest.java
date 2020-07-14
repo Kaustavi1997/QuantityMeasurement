@@ -100,4 +100,12 @@ public class QuantityMeasurementTest {
         boolean equal = centimeter.equals(centimeter);
         Assert.assertEquals(true,equal);
     }
+    @Test
+    public void whenNullForCentimeter_ShouldCheck(){
+        try {
+            double result = quantityMeasurement.converter(null, UnitConverterFactor.INCH_TO_CM);
+        }catch(QuantityMeasurementException e){
+            System.out.println(e.getMessage());;
+        }
+    }
 }
