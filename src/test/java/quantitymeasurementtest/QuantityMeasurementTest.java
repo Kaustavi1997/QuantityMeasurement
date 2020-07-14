@@ -94,4 +94,10 @@ public class QuantityMeasurementTest {
         Centimeter centimeter = new Centimeter(0.0);
         Assert.assertEquals(centimeter,new Centimeter(0.0));
     }
+    @Test
+    public void whenGivenCentimeterValue_CheckForReference() {
+        Centimeter centimeter = new Centimeter(0.0);
+        boolean equal = centimeter.equals(centimeter);
+        Assert.assertEquals(true,equal);
+    }
 }
