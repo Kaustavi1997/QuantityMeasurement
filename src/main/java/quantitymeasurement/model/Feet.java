@@ -1,5 +1,7 @@
 package quantitymeasurement.model;
 
+import java.util.Objects;
+
 public class Feet {
     double feet;
     public Feet(Double feet) {

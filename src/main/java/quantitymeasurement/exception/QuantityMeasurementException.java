@@ -5,7 +5,7 @@ public class QuantityMeasurementException extends Exception {
     public enum ExceptionType{
         NULL_VALUE
     }
-    public QuantityMeasurementException(ExceptionType e, String message) {
+    public QuantityMeasurementException(ExceptionType exceptionType, String message) {
         super(message);
         this.exceptionType = exceptionType;
     }
