@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
+import quantitymeasurement.model.Centimeter;
 import quantitymeasurement.model.Feet;
 import quantitymeasurement.model.Inch;
 import quantitymeasurement.service.QuantityMeasurement;
@@ -25,6 +26,12 @@ public class QuantityMeasurementTest {
         Assert.assertEquals(feet,new Feet(0.0));
     }
     @Test
+    public void whenGivenFeetValue_CheckForReference() {
+        Feet feet = new Feet(2.0);
+        boolean equal = feet.equals(feet);
+        Assert.assertEquals(true,equal);
+    }
+    @Test
     public void whenNullForFeet_ShouldCheck(){
         try {
             double result = quantityMeasurement.converter(null, UnitConverterFactor.FEET_TO_INCH);
@@ -36,6 +43,12 @@ public class QuantityMeasurementTest {
     public void whenGivenTwoInchValue_ifEqual_shouldReturnTrue() {
         Inch inch = new Inch(0.0);
         Assert.assertEquals(inch,new Inch(0.0));
+    }
+    @Test
+    public void whenGivenInchValue_CheckForReference() {
+        Inch inch = new Inch(0.0);
+        boolean equal = inch.equals(inch);
+        Assert.assertEquals(true,equal);
     }
     @Test
     public void whenNullForInch_ShouldCheck(){
@@ -76,4 +89,9 @@ public class QuantityMeasurementTest {
         Assert.assertEquals(3,result,0.0);
     }
 
+    @Test
+    public void whenGivenTwoCentimeterValue_ifEqual_shouldReturnTrue() {
+        Centimeter centimeter = new Centimeter(0.0);
+        Assert.assertEquals(centimeter,new Centimeter(0.0));
+    }
 }
