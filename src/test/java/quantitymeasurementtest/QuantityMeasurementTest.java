@@ -165,4 +165,12 @@ public class QuantityMeasurementTest {
         boolean equal = gallon.equals(gallon);
         Assert.assertEquals(true,equal);
     }
+    @Test
+    public void whenNullForGallon_ShouldCheck(){
+        try {
+            double result = quantityMeasurement.converter(null, UnitConverterFactor.GALLON_TO_LITER);
+        }catch(QuantityMeasurementException e){
+            System.out.println(e.getMessage());;
+        }
+    }
 }
