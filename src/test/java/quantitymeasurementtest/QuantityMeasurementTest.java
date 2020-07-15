@@ -235,4 +235,10 @@ public class QuantityMeasurementTest {
         Weight kg = new Weight(0.0, Weight.Unit.KG);
         Assert.assertEquals(kg,new Weight(0.0, Weight.Unit.KG));
     }
+    @Test
+    public void whenGivenKgValue_CheckForReference() {
+        Weight kg = new Weight(0.0, Weight.Unit.KG);
+        boolean equal = kg.equals(kg);
+        Assert.assertEquals(true,equal);
+    }
 }
