@@ -135,4 +135,10 @@ public class QuantityMeasurementTest {
         double result =quantityMeasurement.add(2.0,2.0);
         Assert.assertEquals(4,result,0.0);
     }
+    @Test
+    public void when1feetAnd2inchAdded_ShouldReturn14inch() throws QuantityMeasurementException {
+        double resultConvert = quantityMeasurement.converter(1.0,UnitConverterFactor.FEET_TO_INCH);
+        double result =quantityMeasurement.add(resultConvert,2.0);
+        Assert.assertEquals(14,result,0.0);
+    }
 }
