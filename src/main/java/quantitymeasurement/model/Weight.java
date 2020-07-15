@@ -1,7 +1,7 @@
 package quantitymeasurement.model;
 
 public class Weight {
-    public enum Unit{ KG };
+    public enum Unit{ KG,GRAM };
     private final Weight.Unit unit;
     private final double value;
     public Weight(double value, Weight.Unit unit) {
