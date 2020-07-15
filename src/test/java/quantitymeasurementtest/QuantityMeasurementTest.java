@@ -223,4 +223,10 @@ public class QuantityMeasurementTest {
         double result =quantityMeasurement.add(resultConvert,3.78);
         Assert.assertEquals(7.56,result,0.0);
     }
+    @Test
+    public void whenLitreAndMlAdded_ShouldReturnLitre() throws QuantityMeasurementException {
+        double resultConvert = quantityMeasurement.converter(1000.0,UnitConverterFactor.ML_TO_LITRE);
+        double result =quantityMeasurement.add(resultConvert,1.0);
+        Assert.assertEquals(2,result,0.0);
+    }
 }
