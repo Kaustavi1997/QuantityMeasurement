@@ -212,4 +212,9 @@ public class QuantityMeasurementTest {
         double result = quantityMeasurement.converter(1.0, UnitConverterFactor.GALLON_TO_LITER);
         Assert.assertEquals(3.78,result,0.0);
     }
+    @Test
+    public void givenLitre_ShouldReturnMl() throws QuantityMeasurementException {
+        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.LITRE_TO_ML);
+        Assert.assertEquals(1000,result,0.0);
+    }
 }
