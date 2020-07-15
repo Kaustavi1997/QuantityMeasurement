@@ -331,4 +331,10 @@ public class QuantityMeasurementTest {
         Temperature celsius = new Temperature(0.0, Temperature.Unit.CELSIUS);
         Assert.assertEquals(celsius,new Temperature(0.0, Temperature.Unit.CELSIUS));
     }
+
+    @Test
+    public void GivenFarenheit_ShouldReturnCelsius() {
+        double result = quantityMeasurement.convertFarenheightToCelsius(212.0);
+        Assert.assertEquals(100.0,result,0.0);
+    }
 }
