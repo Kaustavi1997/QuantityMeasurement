@@ -273,4 +273,9 @@ public class QuantityMeasurementTest {
         Weight gram = new Weight(2.0, Weight.Unit.GRAM);
         Assert.assertEquals(gram,new Weight(2.0, Weight.Unit.GRAM));
     }
+    @Test
+    public void givenKg_ShouldReturnGram() throws QuantityMeasurementException {
+        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.KG_TO_GR);
+        Assert.assertEquals(1000,result,0.0);
+    }
 }
