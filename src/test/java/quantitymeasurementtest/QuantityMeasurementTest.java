@@ -125,4 +125,14 @@ public class QuantityMeasurementTest {
         double result = quantityMeasurement.converter(2.0, UnitConverterFactor.INCH_TO_CM);
         Assert.assertEquals(5.0,result,0.0);
     }
+    @Test
+    public void whenGivenInchValue_ifEqual_shouldReturnTrue() {
+        Length inch = new Length(2.0, Length.Unit.INCH);
+        Assert.assertEquals(inch,new Length(2.0, Length.Unit.INCH));
+    }
+    @Test
+    public void when2inchAnd2inchAdded_ShouldReturn4inch() {
+        double result =quantityMeasurement.add(2.0,2.0);
+        Assert.assertEquals(4,result,0.0);
+    }
 }
