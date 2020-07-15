@@ -1,7 +1,7 @@
 package quantitymeasurement.model;
 
 public class Volume {
-    public enum Unit{ GALLON };
+    public enum Unit{ GALLON,LITRE };
     private final Volume.Unit unit;
     private final double value;
     public Volume(double value, Volume.Unit unit) {
