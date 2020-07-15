@@ -3,9 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
-import quantitymeasurement.model.Centimeter;
-import quantitymeasurement.model.Feet;
-import quantitymeasurement.model.Inch;
+import quantitymeasurement.model.Length;
 import quantitymeasurement.service.QuantityMeasurement;
 import quantitymeasurement.utility.UnitConverterFactor;
 
@@ -22,14 +20,20 @@ public class QuantityMeasurementTest {
     }
     @Test
     public void whenGivenTwoFeetValue_ifEqual_shouldReturnTrue() {
-        Feet feet = new Feet(0.0);
-        Assert.assertEquals(feet,new Feet(0.0));
+        Length feet = new Length(0.0, Length.Unit.FEET);
+        Assert.assertEquals(feet,new Length(0.0, Length.Unit.FEET));
     }
     @Test
     public void whenGivenFeetValue_CheckForReference() {
-        Feet feet = new Feet(2.0);
+        Length feet = new Length(2.0, Length.Unit.FEET);
         boolean equal = feet.equals(feet);
         Assert.assertEquals(true,equal);
+    }
+    @Test
+    public void whenGiven1FeetAnd1inch_ShouldReturnNotEqual(){
+        Length feet = new Length(1.0, Length.Unit.FEET);
+        Length inch = new Length(1.0, Length.Unit.INCH);
+        Assert.assertNotEquals(feet,inch);
     }
     @Test
     public void whenNullForFeet_ShouldCheck(){
@@ -41,12 +45,12 @@ public class QuantityMeasurementTest {
     }
     @Test
     public void whenGivenTwoInchValue_ifEqual_shouldReturnTrue() {
-        Inch inch = new Inch(0.0);
-        Assert.assertEquals(inch,new Inch(0.0));
+        Length inch = new Length(0.0, Length.Unit.INCH);
+        Assert.assertEquals(inch,new Length(0.0, Length.Unit.INCH));
     }
     @Test
     public void whenGivenInchValue_CheckForReference() {
-        Inch inch = new Inch(0.0);
+        Length inch = new Length(0.0, Length.Unit.INCH);
         boolean equal = inch.equals(inch);
         Assert.assertEquals(true,equal);
     }
@@ -91,15 +95,23 @@ public class QuantityMeasurementTest {
 
     @Test
     public void whenGivenTwoCentimeterValue_ifEqual_shouldReturnTrue() {
-        Centimeter centimeter = new Centimeter(0.0);
-        Assert.assertEquals(centimeter,new Centimeter(0.0));
+        Length centimeter = new Length(0.0, Length.Unit.CENTIMETER);
+        Assert.assertEquals(centimeter,new Length(0.0, Length.Unit.CENTIMETER));
     }
     @Test
     public void whenGivenCentimeterValue_CheckForReference() {
-        Centimeter centimeter = new Centimeter(0.0);
+        Length centimeter = new Length(0.0, Length.Unit.CENTIMETER);
         boolean equal = centimeter.equals(centimeter);
         Assert.assertEquals(true,equal);
     }
+
+    @Test
+    public void whenGiven1InchAnd1Cm_ShouldReturnNotEqual() {
+        Length centimeter = new Length(1.0, Length.Unit.CENTIMETER);
+        Length inch = new Length(1.0, Length.Unit.INCH);
+        Assert.assertNotEquals(centimeter,inch);
+    }
+
     @Test
     public void whenNullForCentimeter_ShouldCheck(){
         try {
