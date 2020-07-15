@@ -13,4 +13,7 @@ public class QuantityMeasurement {
     public double add(Double value1,Double value2){
         return value1+value2;
     }
+    public double convertFarenheightToCelsius(double value){
+        return (value - 32)*5/9;
+    }
 }
