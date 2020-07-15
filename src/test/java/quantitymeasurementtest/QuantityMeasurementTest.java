@@ -183,4 +183,9 @@ public class QuantityMeasurementTest {
         Volume gallon = new Volume(2.0, Volume.Unit.GALLON);
         Assert.assertEquals(gallon,new Volume(2.0, Volume.Unit.GALLON));
     }
+    @Test
+    public void whenGivenTwoLitreValue_ifEqual_shouldReturnTrue() {
+        Volume litre = new Volume(0.0, Volume.Unit.LITRE);
+        Assert.assertEquals(litre,new Volume(0.0, Volume.Unit.LITRE));
+    }
 }
