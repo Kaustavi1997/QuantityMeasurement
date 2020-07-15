@@ -202,4 +202,9 @@ public class QuantityMeasurementTest {
             System.out.println(e.getMessage());;
         }
     }
+    @Test
+    public void whenGivenLitreType_ifEqual_shouldReturnTrue() {
+        Volume litre = new Volume(2.0, Volume.Unit.LITRE);
+        Assert.assertEquals(litre,new Volume(2.0, Volume.Unit.LITRE));
+    }
 }
