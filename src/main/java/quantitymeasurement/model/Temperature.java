@@ -1,7 +1,7 @@
 package quantitymeasurement.model;
 
 public class Temperature {
-    public enum Unit{ FAHRENHEIT };
+    public enum Unit{ FAHRENHEIT,CELSIUS };
     private final Temperature.Unit unit;
     private final double value;
     public Temperature(double value, Temperature.Unit unit) {
