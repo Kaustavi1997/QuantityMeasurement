@@ -241,4 +241,12 @@ public class QuantityMeasurementTest {
         boolean equal = kg.equals(kg);
         Assert.assertEquals(true,equal);
     }
+    @Test
+    public void whenNullForKg_ShouldCheck(){
+        try {
+            double result = quantityMeasurement.converter(null, UnitConverterFactor.KG_TO_GR);
+        }catch(QuantityMeasurementException e){
+            System.out.println(e.getMessage());;
+        }
+    }
 }
