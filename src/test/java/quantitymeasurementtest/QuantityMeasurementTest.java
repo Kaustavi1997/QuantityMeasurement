@@ -147,4 +147,10 @@ public class QuantityMeasurementTest {
         double result =quantityMeasurement.add(resultConvert,resultConvert);
         Assert.assertEquals(24,result,0.0);
     }
+    @Test
+    public void when2inchAndCmAdded_ShouldReturn3inch() throws QuantityMeasurementException {
+        double resultConvert = quantityMeasurement.converter(2.5,UnitConverterFactor.CM_TO_INCH);
+        double result =quantityMeasurement.add(resultConvert,2.0);
+        Assert.assertEquals(3,result,0.025);
+    }
 }
