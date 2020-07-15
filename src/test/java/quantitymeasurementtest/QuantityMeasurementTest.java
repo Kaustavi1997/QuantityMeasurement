@@ -315,5 +315,20 @@ public class QuantityMeasurementTest {
         Temperature fahrenheit = new Temperature(0.0, Temperature.Unit.FAHRENHEIT);
         Assert.assertEquals(fahrenheit,new Temperature(0.0, Temperature.Unit.FAHRENHEIT));
     }
-
+    @Test
+    public void whenGivenTwoCelsiusValue_ifEqual_shouldReturnTrue() {
+        Temperature celsius = new Temperature(0.0, Temperature.Unit.CELSIUS);
+        Assert.assertEquals(celsius,new Temperature(0.0, Temperature.Unit.CELSIUS));
+    }
+    @Test
+    public void whenGivenCelsiusValue_CheckForReference() {
+        Temperature celsius = new Temperature(0.0, Temperature.Unit.CELSIUS);
+        boolean equal = celsius.equals(celsius);
+        Assert.assertEquals(true,equal);
+    }
+    @Test
+    public void whenGivenCelsiusType_ifEqual_shouldReturnTrue() {
+        Temperature celsius = new Temperature(0.0, Temperature.Unit.CELSIUS);
+        Assert.assertEquals(celsius,new Temperature(0.0, Temperature.Unit.CELSIUS));
+    }
 }
