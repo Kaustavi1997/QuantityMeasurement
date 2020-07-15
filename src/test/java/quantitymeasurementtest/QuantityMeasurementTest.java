@@ -5,6 +5,7 @@ import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
 import quantitymeasurement.model.Length;
 import quantitymeasurement.model.Volume;
+import quantitymeasurement.model.Weight;
 import quantitymeasurement.service.QuantityMeasurement;
 import quantitymeasurement.utility.UnitConverterFactor;
 
@@ -228,5 +229,10 @@ public class QuantityMeasurementTest {
         double resultConvert = quantityMeasurement.converter(1000.0,UnitConverterFactor.ML_TO_LITRE);
         double result =quantityMeasurement.add(resultConvert,1.0);
         Assert.assertEquals(2,result,0.0);
+    }
+    @Test
+    public void whenGivenTwoKgValue_ifEqual_shouldReturnTrue() {
+        Weight kg = new Weight(0.0, Weight.Unit.KG);
+        Assert.assertEquals(kg,new Weight(0.0, Weight.Unit.KG));
     }
 }
