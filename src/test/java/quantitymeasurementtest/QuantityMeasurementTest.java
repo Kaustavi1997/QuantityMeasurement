@@ -249,4 +249,9 @@ public class QuantityMeasurementTest {
             System.out.println(e.getMessage());;
         }
     }
+    @Test
+    public void whenGivenKgType_ifEqual_shouldReturnTrue() {
+        Weight kg = new Weight(2.0, Weight.Unit.KG);
+        Assert.assertEquals(kg,new Weight(2.0, Weight.Unit.KG));
+    }
 }
