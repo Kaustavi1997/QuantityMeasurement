@@ -159,4 +159,10 @@ public class QuantityMeasurementTest {
         Volume gallon = new Volume(0.0, Volume.Unit.GALLON);
         Assert.assertEquals(gallon,new Volume(0.0, Volume.Unit.GALLON));
     }
+    @Test
+    public void whenGivenGallonValue_CheckForReference() {
+        Volume gallon = new Volume(0.0, Volume.Unit.GALLON);
+        boolean equal = gallon.equals(gallon);
+        Assert.assertEquals(true,equal);
+    }
 }
