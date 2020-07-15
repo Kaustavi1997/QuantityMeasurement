@@ -194,4 +194,12 @@ public class QuantityMeasurementTest {
         boolean equal = litre.equals(litre);
         Assert.assertEquals(true,equal);
     }
+    @Test
+    public void whenNullForLitre_ShouldCheck(){
+        try {
+            double result = quantityMeasurement.converter(null, UnitConverterFactor.LITRE_TO_ML);
+        }catch(QuantityMeasurementException e){
+            System.out.println(e.getMessage());;
+        }
+    }
 }
