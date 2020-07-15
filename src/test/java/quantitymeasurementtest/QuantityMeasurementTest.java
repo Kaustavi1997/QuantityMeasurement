@@ -31,6 +31,11 @@ public class QuantityMeasurementTest {
         Assert.assertEquals(true,equal);
     }
     @Test
+    public void whenGivenFeetType_ifEqual_shouldReturnTrue() {
+        Length inch = new Length(2.0, Length.Unit.FEET);
+        Assert.assertEquals(inch,new Length(2.0, Length.Unit.FEET));
+    }
+    @Test
     public void whenGiven1FeetAnd1inch_ShouldReturnNotEqual(){
         Length feet = new Length(1.0, Length.Unit.FEET);
         Length inch = new Length(1.0, Length.Unit.INCH);
@@ -127,7 +132,7 @@ public class QuantityMeasurementTest {
         Assert.assertEquals(5.0,result,0.0);
     }
     @Test
-    public void whenGivenInchValue_ifEqual_shouldReturnTrue() {
+    public void whenGivenInchType_ifEqual_shouldReturnTrue() {
         Length inch = new Length(2.0, Length.Unit.INCH);
         Assert.assertEquals(inch,new Length(2.0, Length.Unit.INCH));
     }
@@ -172,5 +177,10 @@ public class QuantityMeasurementTest {
         }catch(QuantityMeasurementException e){
             System.out.println(e.getMessage());;
         }
+    }
+    @Test
+    public void whenGivenGallonType_ifEqual_shouldReturnTrue() {
+        Volume gallon = new Volume(2.0, Volume.Unit.GALLON);
+        Assert.assertEquals(gallon,new Volume(2.0, Volume.Unit.GALLON));
     }
 }
