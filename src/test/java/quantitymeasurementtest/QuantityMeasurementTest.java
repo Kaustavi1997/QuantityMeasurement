@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
 import quantitymeasurement.model.Length;
+import quantitymeasurement.model.Volume;
 import quantitymeasurement.service.QuantityMeasurement;
 import quantitymeasurement.utility.UnitConverterFactor;
 
@@ -152,5 +153,10 @@ public class QuantityMeasurementTest {
         double resultConvert = quantityMeasurement.converter(2.5,UnitConverterFactor.CM_TO_INCH);
         double result =quantityMeasurement.add(resultConvert,2.0);
         Assert.assertEquals(3,result,0.025);
+    }
+    @Test
+    public void whenGivenTwoGallonValue_ifEqual_shouldReturnTrue() {
+        Volume gallon = new Volume(0.0, Volume.Unit.GALLON);
+        Assert.assertEquals(gallon,new Volume(0.0, Volume.Unit.GALLON));
     }
 }
