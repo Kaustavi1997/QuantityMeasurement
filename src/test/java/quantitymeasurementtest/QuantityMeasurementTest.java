@@ -278,4 +278,9 @@ public class QuantityMeasurementTest {
         double result = quantityMeasurement.converter(1.0, UnitConverterFactor.KG_TO_GR);
         Assert.assertEquals(1000,result,0.0);
     }
+    @Test
+    public void givenTonne_ShouldReturnKg() throws QuantityMeasurementException {
+        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.TONNE_TO_KG);
+        Assert.assertEquals(1000,result,0.0);
+    }
 }
