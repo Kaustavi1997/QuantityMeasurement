@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
 import quantitymeasurement.model.Length;
+import quantitymeasurement.model.Temperature;
 import quantitymeasurement.model.Volume;
 import quantitymeasurement.model.Weight;
 import quantitymeasurement.service.QuantityMeasurement;
@@ -290,4 +291,29 @@ public class QuantityMeasurementTest {
         double result =quantityMeasurement.add(resultConvert1,resultConvert2);
         Assert.assertEquals(1001.0,result,0.0);
     }
+    @Test
+    public void whenGivenTwoFahrenheitValue_ifEqual_shouldReturnTrue() {
+        Temperature fahrenheit = new Temperature(0.0, Temperature.Unit.FAHRENHEIT);
+        Assert.assertEquals(fahrenheit,new Temperature(0.0, Temperature.Unit.FAHRENHEIT));
+    }
+    @Test
+    public void whenGivenFahrenheitValue_CheckForReference() {
+        Temperature fahrenheit = new Temperature(0.0, Temperature.Unit.FAHRENHEIT);
+        boolean equal = fahrenheit.equals(fahrenheit);
+        Assert.assertEquals(true,equal);
+    }
+    @Test
+    public void whenNullForFahrenheit_ShouldCheck(){
+        try {
+            double result = quantityMeasurement.converter(null, UnitConverterFactor.FR_TO_CE);
+        }catch(QuantityMeasurementException e){
+            System.out.println(e.getMessage());;
+        }
+    }
+    @Test
+    public void whenGivenFahrenheitType_ifEqual_shouldReturnTrue() {
+        Temperature fahrenheit = new Temperature(0.0, Temperature.Unit.FAHRENHEIT);
+        Assert.assertEquals(fahrenheit,new Temperature(0.0, Temperature.Unit.FAHRENHEIT));
+    }
+
 }
