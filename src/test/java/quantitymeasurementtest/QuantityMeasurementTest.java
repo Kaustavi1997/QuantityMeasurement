@@ -188,4 +188,10 @@ public class QuantityMeasurementTest {
         Volume litre = new Volume(0.0, Volume.Unit.LITRE);
         Assert.assertEquals(litre,new Volume(0.0, Volume.Unit.LITRE));
     }
+    @Test
+    public void whenGivenLitreValue_CheckForReference() {
+        Volume litre = new Volume(0.0, Volume.Unit.LITRE);
+        boolean equal = litre.equals(litre);
+        Assert.assertEquals(true,equal);
+    }
 }
