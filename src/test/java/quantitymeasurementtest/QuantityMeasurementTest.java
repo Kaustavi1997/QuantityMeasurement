@@ -207,4 +207,9 @@ public class QuantityMeasurementTest {
         Volume litre = new Volume(2.0, Volume.Unit.LITRE);
         Assert.assertEquals(litre,new Volume(2.0, Volume.Unit.LITRE));
     }
+    @Test
+    public void givenGallon_ShouldReturnLitre() throws QuantityMeasurementException {
+        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.GALLON_TO_LITER);
+        Assert.assertEquals(3.78,result,0.0);
+    }
 }
