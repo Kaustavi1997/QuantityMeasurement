@@ -250,8 +250,27 @@ public class QuantityMeasurementTest {
         }
     }
     @Test
-    public void whenGivenKgType_ifEqual_shouldReturnTrue() {
-        Weight kg = new Weight(2.0, Weight.Unit.KG);
-        Assert.assertEquals(kg,new Weight(2.0, Weight.Unit.KG));
+    public void whenGivenTwoGramValue_ifEqual_shouldReturnTrue() {
+        Weight gram = new Weight(0.0, Weight.Unit.GRAM);
+        Assert.assertEquals(gram,new Weight(0.0, Weight.Unit.GRAM));
+    }
+    @Test
+    public void whenGivenGramValue_CheckForReference() {
+        Weight gram = new Weight(0.0, Weight.Unit.GRAM);
+        boolean equal = gram.equals(gram);
+        Assert.assertEquals(true,equal);
+    }
+    @Test
+    public void whenNullForGram_ShouldCheck(){
+        try {
+            double result = quantityMeasurement.converter(null, UnitConverterFactor.GR_TO_KG);
+        }catch(QuantityMeasurementException e){
+            System.out.println(e.getMessage());;
+        }
+    }
+    @Test
+    public void whenGivenGramType_ifEqual_shouldReturnTrue() {
+        Weight gram = new Weight(2.0, Weight.Unit.GRAM);
+        Assert.assertEquals(gram,new Weight(2.0, Weight.Unit.GRAM));
     }
 }
