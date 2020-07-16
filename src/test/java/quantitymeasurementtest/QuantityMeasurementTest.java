@@ -3,12 +3,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import quantitymeasurement.exception.QuantityMeasurementException;
-import quantitymeasurement.model.Length;
-import quantitymeasurement.model.Temperature;
-import quantitymeasurement.model.Volume;
-import quantitymeasurement.model.Weight;
+import quantitymeasurement.model.*;
 import quantitymeasurement.service.QuantityMeasurement;
-import quantitymeasurement.utility.UnitConverterFactor;
+import quantitymeasurement.utility.UnitVariation;
 
 public class QuantityMeasurementTest {
     QuantityMeasurement quantityMeasurement;
@@ -18,323 +15,298 @@ public class QuantityMeasurementTest {
     }
     @Test
     public void givenFeet_ShouldReturnInch() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(2.5, UnitConverterFactor.FEET_TO_INCH);
+        double result = quantityMeasurement.converter(2.5, UnitVariation.FEET);
         Assert.assertEquals(30,result,0.0);
     }
     @Test
-    public void whenGivenTwoFeetValue_ifEqual_shouldReturnTrue() {
-        Length feet = new Length(0.0, Length.Unit.FEET);
-        Assert.assertEquals(feet,new Length(0.0, Length.Unit.FEET));
+    public void whenGivenTwoFeetValue_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+       Unit feet1 = new Unit(0.0, UnitVariation.FEET);
+        Assert.assertEquals(feet1,new Unit(0.0, UnitVariation.FEET));
     }
     @Test
-    public void whenGivenFeetValue_CheckForReference() {
-        Length feet = new Length(2.0, Length.Unit.FEET);
+    public void whenGivenFeetValue_CheckForReference() throws QuantityMeasurementException {
+        Unit feet = new Unit(2.0, UnitVariation.FEET);
         boolean equal = feet.equals(feet);
         Assert.assertEquals(true,equal);
     }
     @Test
-    public void whenGivenFeetType_ifEqual_shouldReturnTrue() {
-        Length inch = new Length(2.0, Length.Unit.FEET);
-        Assert.assertEquals(inch,new Length(2.0, Length.Unit.FEET));
+    public void whenGivenFeetType_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit inch = new Unit(2.0, UnitVariation.INCH);
+        Assert.assertEquals(inch,new Unit(2.0, UnitVariation.INCH));
     }
     @Test
-    public void whenGiven1FeetAnd1inch_ShouldReturnNotEqual(){
-        Length feet = new Length(1.0, Length.Unit.FEET);
-        Length inch = new Length(1.0, Length.Unit.INCH);
+    public void whenGiven1FeetAnd1inch_ShouldReturnNotEqual() throws QuantityMeasurementException {
+        Unit feet = new Unit(1.0, UnitVariation.FEET);
+        Unit inch = new Unit(1.0, UnitVariation.INCH);
         Assert.assertNotEquals(feet,inch);
     }
     @Test
     public void whenNullForFeet_ShouldCheck(){
         try {
-            double result = quantityMeasurement.converter(null, UnitConverterFactor.FEET_TO_INCH);
+            double result = quantityMeasurement.converter(null, UnitVariation.FEET);
         }catch(QuantityMeasurementException e){
             System.out.println(e.getMessage());;
         }
     }
     @Test
-    public void whenGivenTwoInchValue_ifEqual_shouldReturnTrue() {
-        Length inch = new Length(0.0, Length.Unit.INCH);
-        Assert.assertEquals(inch,new Length(0.0, Length.Unit.INCH));
+    public void whenGivenTwoInchValue_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit inch = new Unit(0.0, UnitVariation.INCH);
+        Assert.assertEquals(inch,new Unit(0.0, UnitVariation.INCH));
     }
     @Test
-    public void whenGivenInchValue_CheckForReference() {
-        Length inch = new Length(0.0, Length.Unit.INCH);
+    public void whenGivenInchValue_CheckForReference() throws QuantityMeasurementException {
+        Unit inch = new Unit(0.0, UnitVariation.INCH);
         boolean equal = inch.equals(inch);
         Assert.assertEquals(true,equal);
     }
     @Test
     public void whenNullForInch_ShouldCheck(){
         try {
-            double result = quantityMeasurement.converter(null, UnitConverterFactor.INCH_TO_FEET);
+            double result = quantityMeasurement.converter(null, UnitVariation.FEET);
         }catch(QuantityMeasurementException e){
             System.out.println(e.getMessage());;
         }
     }
     @Test
-    public void givenInch_ShouldReturnFeet() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(36.0, UnitConverterFactor.INCH_TO_FEET);
-        Assert.assertEquals(2.988,result,0.0);
+    public void given3Feet1Yard_ShouldReturnTrue_WhenCompared() throws QuantityMeasurementException {
+        Unit feet = new Unit(3.0, UnitVariation.FEET);
+        Unit yard = new Unit(1.0, UnitVariation.YARD);
+        Assert.assertTrue(quantityMeasurement.compare(feet, yard));
     }
     @Test
-    public void givenFeet_ShouldReturnYard() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(3.0, UnitConverterFactor.FEET_TO_YARD);
-        Assert.assertEquals(1,result,0.1);
+    public void given1Feet1Yard_ShouldReturnFalse() throws QuantityMeasurementException {
+        Unit feet = new Unit(1.0, UnitVariation.FEET);
+        Unit yard = new Unit(1.0, UnitVariation.YARD);
+        Assert.assertFalse(quantityMeasurement.compare(feet, yard));
     }
     @Test
-    public void givenFeet_NotEqualToYard() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.FEET_TO_YARD);
-        Assert.assertNotEquals(1.0,result,0.0);
+    public void given1Inch1Yard_ShouldReturnFalse() throws QuantityMeasurementException {
+        Unit inch = new Unit(1.0, UnitVariation.INCH);
+        Unit yard = new Unit(1.0, UnitVariation.YARD);
+        Assert.assertFalse(quantityMeasurement.compare(inch, yard));
     }
     @Test
-    public void givenInch_NotEqualToYard() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.INCH_TO_YARD);
-        Assert.assertNotEquals(1.0,result,0.0);
+    public void given1Yard36Inch_ShouldReturnTrue() throws QuantityMeasurementException {
+        Unit inch = new Unit(36.0, UnitVariation.INCH);
+        Unit yard = new Unit(1.0, UnitVariation.YARD);
+        Assert.assertTrue(quantityMeasurement.compare(yard, inch));
     }
     @Test
-    public void givenYard_ShouldReturnInch() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.YARD_TO_INCH);
-        Assert.assertEquals(36.0,result,0.0);
+    public void given1Yard3Feet_ShouldReturnTrue() throws QuantityMeasurementException {
+        Unit yard = new Unit(1.0, UnitVariation.YARD);
+        Unit feet = new Unit(3.0, UnitVariation.FEET);
+        Assert.assertTrue(quantityMeasurement.compare(yard, feet));
     }
     @Test
-    public void givenYard_ShouldReturnFeet() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.YARD_TO_FEET);
-        Assert.assertEquals(3,result,0.0);
-    }
-
-    @Test
-    public void whenGivenTwoCentimeterValue_ifEqual_shouldReturnTrue() {
-        Length centimeter = new Length(0.0, Length.Unit.CENTIMETER);
-        Assert.assertEquals(centimeter,new Length(0.0, Length.Unit.CENTIMETER));
+    public void whenGivenTwoCentimeterValue_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit centimeter = new Unit(0.0, UnitVariation.CM);
+        Assert.assertEquals(centimeter,new Unit(0.0, UnitVariation.CM));
     }
     @Test
-    public void whenGivenCentimeterValue_CheckForReference() {
-        Length centimeter = new Length(0.0, Length.Unit.CENTIMETER);
+    public void whenGivenCentimeterValue_CheckForReference() throws QuantityMeasurementException {
+        Unit centimeter = new Unit(0.0, UnitVariation.CM);
         boolean equal = centimeter.equals(centimeter);
         Assert.assertEquals(true,equal);
     }
-
     @Test
-    public void whenGiven1InchAnd1Cm_ShouldReturnNotEqual() {
-        Length centimeter = new Length(1.0, Length.Unit.CENTIMETER);
-        Length inch = new Length(1.0, Length.Unit.INCH);
+    public void whenGiven1InchAnd1Cm_ShouldReturnNotEqual() throws QuantityMeasurementException {
+        Unit centimeter = new Unit(1.0, UnitVariation.CM);
+        Unit inch = new Unit(1.0, UnitVariation.INCH);
         Assert.assertNotEquals(centimeter,inch);
     }
-
     @Test
     public void whenNullForCentimeter_ShouldCheck(){
         try {
-            double result = quantityMeasurement.converter(null, UnitConverterFactor.INCH_TO_CM);
+            double result = quantityMeasurement.converter(null, UnitVariation.CM);
         }catch(QuantityMeasurementException e){
             System.out.println(e.getMessage());;
         }
     }
     @Test
-    public void givenInch_ShouldReturnCm() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(2.0, UnitConverterFactor.INCH_TO_CM);
-        Assert.assertEquals(5.0,result,0.0);
+    public void given2Inch5Cm_ShouldReturnTrue() throws QuantityMeasurementException {
+        Unit inch = new Unit(2.0, UnitVariation.INCH);
+        Unit centimeter = new Unit(5.0, UnitVariation.CM);
+        Assert.assertTrue(quantityMeasurement.compare(inch, centimeter));
     }
     @Test
-    public void whenGivenInchType_ifEqual_shouldReturnTrue() {
-        Length inch = new Length(2.0, Length.Unit.INCH);
-        Assert.assertEquals(inch,new Length(2.0, Length.Unit.INCH));
+    public void whenGivenInchType_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit inch = new Unit(2.0, UnitVariation.INCH);
+        Assert.assertEquals(inch,new Unit(2.0, UnitVariation.INCH));
     }
     @Test
-    public void when2inchAnd2inchAdded_ShouldReturn4inch() {
-        double result =quantityMeasurement.add(2.0,2.0);
-        Assert.assertEquals(4,result,0.0);
+    public void when2inchAnd2inchAdded_ShouldReturn4inch() throws QuantityMeasurementException {
+        Unit inch1 = new Unit(2.0, UnitVariation.INCH);
+        Unit inch2 = new Unit(2.0, UnitVariation.INCH);
+        double result = quantityMeasurement.add(inch1, inch2);
+        Assert.assertEquals(result, 4.0, 0.0);
     }
     @Test
     public void when1feetAnd2inchAdded_ShouldReturn14inch() throws QuantityMeasurementException {
-        double resultConvert = quantityMeasurement.converter(1.0,UnitConverterFactor.FEET_TO_INCH);
-        double result =quantityMeasurement.add(resultConvert,2.0);
-        Assert.assertEquals(14,result,0.0);
+        Unit feet = new Unit(1.0, UnitVariation.FEET);
+        Unit inch = new Unit(2.0, UnitVariation.INCH);
+        double result = quantityMeasurement.add(feet, inch);
+        Assert.assertEquals(result, 14.0, 0.0);
     }
     @Test
     public void when1feetAnd1feetAdded_ShouldReturn24inch() throws QuantityMeasurementException {
-        double resultConvert = quantityMeasurement.converter(1.0,UnitConverterFactor.FEET_TO_INCH);
-        double result =quantityMeasurement.add(resultConvert,resultConvert);
-        Assert.assertEquals(24,result,0.0);
+        Unit feet1 = new Unit(1.0, UnitVariation.FEET);
+        Unit feet2 = new Unit(1.0, UnitVariation.FEET);
+        double result = quantityMeasurement.add(feet1, feet2);
+        Assert.assertEquals(result, 24.0, 0.0001);
     }
     @Test
-    public void when2inchAndCmAdded_ShouldReturn3inch() throws QuantityMeasurementException {
-        double resultConvert = quantityMeasurement.converter(2.5,UnitConverterFactor.CM_TO_INCH);
-        double result =quantityMeasurement.add(resultConvert,2.0);
-        Assert.assertEquals(3,result,0.025);
+    public void wheninchAndCmAdded_ShouldReturninch() throws QuantityMeasurementException {
+        Unit inch = new Unit(2.0, UnitVariation.INCH);
+        Unit centimeter = new Unit(2.5, UnitVariation.CM);
+        double result = quantityMeasurement.add(inch, centimeter);
+        Assert.assertEquals(result, 3.0, 0.025);
     }
     @Test
-    public void whenGivenTwoGallonValue_ifEqual_shouldReturnTrue() {
-        Volume gallon = new Volume(0.0, Volume.Unit.GALLON);
-        Assert.assertEquals(gallon,new Volume(0.0, Volume.Unit.GALLON));
+    public void whenGivenTwoGallonValue_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit gallon = new Unit(0.0, UnitVariation.GALLON);
+        Assert.assertEquals(gallon,new Unit(0.0, UnitVariation.GALLON));
     }
     @Test
-    public void whenGivenGallonValue_CheckForReference() {
-        Volume gallon = new Volume(0.0, Volume.Unit.GALLON);
+    public void whenGivenGallonValue_CheckForReference() throws QuantityMeasurementException {
+        Unit gallon = new Unit(0.0, UnitVariation.GALLON);
         boolean equal = gallon.equals(gallon);
         Assert.assertEquals(true,equal);
     }
     @Test
     public void whenNullForGallon_ShouldCheck(){
         try {
-            double result = quantityMeasurement.converter(null, UnitConverterFactor.GALLON_TO_LITER);
+            double result = quantityMeasurement.converter(null, UnitVariation.GALLON);
         }catch(QuantityMeasurementException e){
             System.out.println(e.getMessage());;
         }
     }
     @Test
-    public void whenGivenGallonType_ifEqual_shouldReturnTrue() {
-        Volume gallon = new Volume(2.0, Volume.Unit.GALLON);
-        Assert.assertEquals(gallon,new Volume(2.0, Volume.Unit.GALLON));
+    public void whenGivenGallonType_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit gallon = new Unit(2.0, UnitVariation.GALLON);
+        Assert.assertEquals(gallon,new Unit(2.0, UnitVariation.GALLON));
     }
     @Test
-    public void whenGivenTwoLitreValue_ifEqual_shouldReturnTrue() {
-        Volume litre = new Volume(0.0, Volume.Unit.LITRE);
-        Assert.assertEquals(litre,new Volume(0.0, Volume.Unit.LITRE));
+    public void whenGivenTwoLitreValue_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit litre = new Unit(0.0, UnitVariation.LITRE);
+        Assert.assertEquals(litre,new Unit(0.0, UnitVariation.LITRE));
     }
     @Test
-    public void whenGivenLitreValue_CheckForReference() {
-        Volume litre = new Volume(0.0, Volume.Unit.LITRE);
+    public void whenGivenLitreValue_CheckForReference() throws QuantityMeasurementException {
+        Unit litre = new Unit(0.0, UnitVariation.LITRE);
         boolean equal = litre.equals(litre);
         Assert.assertEquals(true,equal);
     }
     @Test
     public void whenNullForLitre_ShouldCheck(){
         try {
-            double result = quantityMeasurement.converter(null, UnitConverterFactor.LITRE_TO_ML);
+            double result = quantityMeasurement.converter(null, UnitVariation.LITRE);
         }catch(QuantityMeasurementException e){
             System.out.println(e.getMessage());;
         }
     }
     @Test
-    public void whenGivenLitreType_ifEqual_shouldReturnTrue() {
-        Volume litre = new Volume(2.0, Volume.Unit.LITRE);
-        Assert.assertEquals(litre,new Volume(2.0, Volume.Unit.LITRE));
+    public void whenGivenLitreType_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit litre = new Unit(2.0, UnitVariation.LITRE);
+        Assert.assertEquals(litre,new Unit(2.0, UnitVariation.LITRE));
     }
     @Test
-    public void givenGallon_ShouldReturnLitre() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.GALLON_TO_LITER);
-        Assert.assertEquals(3.78,result,0.0);
+    public void givenGallonAndLitre_ShouldReturnTrue() throws QuantityMeasurementException {
+        Unit gallon = new Unit(1.0, UnitVariation.GALLON);
+        Unit litre = new Unit(3.78, UnitVariation.LITRE);
+        Assert.assertTrue(quantityMeasurement.compare(gallon, litre));
     }
     @Test
-    public void givenLitre_ShouldReturnMl() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.LITRE_TO_ML);
-        Assert.assertEquals(1000,result,0.0);
+    public void givenLitreMililitre_ShouldReturnTrue() throws QuantityMeasurementException {
+        Unit millilitre = new Unit(1000.0, UnitVariation.MILLILITRE);
+        Unit litre = new Unit(1.0, UnitVariation.LITRE);
+        Assert.assertTrue(quantityMeasurement.compare(millilitre, litre));
     }
     @Test
     public void whenGallonAndLitreAdded_ShouldReturnLitre() throws QuantityMeasurementException {
-        double resultConvert = quantityMeasurement.converter(1.0,UnitConverterFactor.GALLON_TO_LITER);
-        double result =quantityMeasurement.add(resultConvert,3.78);
-        Assert.assertEquals(7.56,result,0.0);
+        Unit gallon = new Unit(1.0, UnitVariation.GALLON);
+        Unit litre = new Unit(3.78, UnitVariation.LITRE);
+        Assert.assertEquals(quantityMeasurement.add(litre, gallon), 7.56, 0.00);
     }
     @Test
     public void whenLitreAndMlAdded_ShouldReturnLitre() throws QuantityMeasurementException {
-        double resultConvert = quantityMeasurement.converter(1000.0,UnitConverterFactor.ML_TO_LITRE);
-        double result =quantityMeasurement.add(resultConvert,1.0);
-        Assert.assertEquals(2,result,0.0);
+        Unit ml = new Unit(1000.0, UnitVariation.MILLILITRE);
+        Unit litre = new Unit(1.0, UnitVariation.LITRE);
+        Assert.assertEquals(quantityMeasurement.add(litre, ml), 2, 0.00);
     }
     @Test
-    public void whenGivenTwoKgValue_ifEqual_shouldReturnTrue() {
-        Weight kg = new Weight(0.0, Weight.Unit.KG);
-        Assert.assertEquals(kg,new Weight(0.0, Weight.Unit.KG));
+    public void whenGivenTwoKgValue_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit kg = new Unit(0.0, UnitVariation.KILOGRAM);
+        Assert.assertEquals(kg,new Unit(0.0, UnitVariation.KILOGRAM));
     }
     @Test
-    public void whenGivenKgValue_CheckForReference() {
-        Weight kg = new Weight(0.0, Weight.Unit.KG);
+    public void whenGivenKgValue_CheckForReference() throws QuantityMeasurementException {
+        Unit kg = new Unit(0.0, UnitVariation.KILOGRAM);
         boolean equal = kg.equals(kg);
         Assert.assertEquals(true,equal);
     }
     @Test
     public void whenNullForKg_ShouldCheck(){
         try {
-            double result = quantityMeasurement.converter(null, UnitConverterFactor.KG_TO_GR);
+            double result = quantityMeasurement.converter(null, UnitVariation.KILOGRAM);
         }catch(QuantityMeasurementException e){
             System.out.println(e.getMessage());;
         }
     }
     @Test
-    public void whenGivenTwoGramValue_ifEqual_shouldReturnTrue() {
-        Weight gram = new Weight(0.0, Weight.Unit.GRAM);
-        Assert.assertEquals(gram,new Weight(0.0, Weight.Unit.GRAM));
+    public void whenGivenTwoGramValue_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit gram = new Unit(0.0, UnitVariation.GRAM);
+        Assert.assertEquals(gram,new Unit(0.0, UnitVariation.GRAM));
     }
     @Test
-    public void whenGivenGramValue_CheckForReference() {
-        Weight gram = new Weight(0.0, Weight.Unit.GRAM);
+    public void whenGivenGramValue_CheckForReference() throws QuantityMeasurementException {
+        Unit gram = new Unit(0.0, UnitVariation.GRAM);
         boolean equal = gram.equals(gram);
         Assert.assertEquals(true,equal);
     }
     @Test
     public void whenNullForGram_ShouldCheck(){
         try {
-            double result = quantityMeasurement.converter(null, UnitConverterFactor.GR_TO_KG);
+            double result = quantityMeasurement.converter(null, UnitVariation.GRAM);
         }catch(QuantityMeasurementException e){
             System.out.println(e.getMessage());;
         }
     }
     @Test
-    public void whenGivenGramType_ifEqual_shouldReturnTrue() {
-        Weight gram = new Weight(2.0, Weight.Unit.GRAM);
-        Assert.assertEquals(gram,new Weight(2.0, Weight.Unit.GRAM));
+    public void whenGivenGramType_ifEqual_shouldReturnTrue() throws QuantityMeasurementException {
+        Unit gram = new Unit(2.0, UnitVariation.GRAM);
+        Assert.assertEquals(gram,new Unit(2.0, UnitVariation.GRAM));
     }
     @Test
     public void givenKg_ShouldReturnGram() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.KG_TO_GR);
-        Assert.assertEquals(1000,result,0.0);
+        Unit kilogram = new Unit(1.0, UnitVariation.KILOGRAM);
+        Unit grams = new Unit(1000.0, UnitVariation.GRAM);
+        Assert.assertTrue(quantityMeasurement.compare(grams, kilogram));
     }
     @Test
     public void givenTonne_ShouldReturnKg() throws QuantityMeasurementException {
-        double result = quantityMeasurement.converter(1.0, UnitConverterFactor.TONNE_TO_KG);
-        Assert.assertEquals(1000,result,0.0);
+        Unit tonne = new Unit(1.0, UnitVariation.TONNE);
+        Unit kilogram = new Unit(1000.0, UnitVariation.KILOGRAM);
+        Assert.assertTrue(quantityMeasurement.compare(tonne, kilogram));
     }
     @Test
     public void whenTonneAndGramAdded_ShouldReturnKg() throws QuantityMeasurementException {
-        double resultConvert1 = quantityMeasurement.converter(1.0,UnitConverterFactor.TONNE_TO_KG);
-        double resultConvert2 = quantityMeasurement.converter(1000.0,UnitConverterFactor.GR_TO_KG);
-        double result =quantityMeasurement.add(resultConvert1,resultConvert2);
-        Assert.assertEquals(1001.0,result,0.0);
+        Unit tonne = new Unit(1.0, UnitVariation.TONNE);
+        Unit gram = new Unit(1000.0, UnitVariation.GRAM);
+        Assert.assertEquals(1001.0, quantityMeasurement.add(tonne, gram), 0.0);
     }
-    @Test
-    public void whenGivenTwoFahrenheitValue_ifEqual_shouldReturnTrue() {
-        Temperature fahrenheit = new Temperature(0.0, Temperature.Unit.FAHRENHEIT);
-        Assert.assertEquals(fahrenheit,new Temperature(0.0, Temperature.Unit.FAHRENHEIT));
-    }
-    @Test
-    public void whenGivenFahrenheitValue_CheckForReference() {
-        Temperature fahrenheit = new Temperature(0.0, Temperature.Unit.FAHRENHEIT);
-        boolean equal = fahrenheit.equals(fahrenheit);
-        Assert.assertEquals(true,equal);
-    }
-    @Test
-    public void whenNullForFahrenheit_ShouldCheck(){
-        try {
-            double result = quantityMeasurement.converter(null, UnitConverterFactor.FR_TO_CE);
-        }catch(QuantityMeasurementException e){
-            System.out.println(e.getMessage());;
-        }
-    }
-    @Test
-    public void whenGivenFahrenheitType_ifEqual_shouldReturnTrue() {
-        Temperature fahrenheit = new Temperature(0.0, Temperature.Unit.FAHRENHEIT);
-        Assert.assertEquals(fahrenheit,new Temperature(0.0, Temperature.Unit.FAHRENHEIT));
-    }
-    @Test
-    public void whenGivenTwoCelsiusValue_ifEqual_shouldReturnTrue() {
-        Temperature celsius = new Temperature(0.0, Temperature.Unit.CELSIUS);
-        Assert.assertEquals(celsius,new Temperature(0.0, Temperature.Unit.CELSIUS));
-    }
-    @Test
-    public void whenGivenCelsiusValue_CheckForReference() {
-        Temperature celsius = new Temperature(0.0, Temperature.Unit.CELSIUS);
-        boolean equal = celsius.equals(celsius);
-        Assert.assertEquals(true,equal);
-    }
-    @Test
-    public void whenGivenCelsiusType_ifEqual_shouldReturnTrue() {
-        Temperature celsius = new Temperature(0.0, Temperature.Unit.CELSIUS);
-        Assert.assertEquals(celsius,new Temperature(0.0, Temperature.Unit.CELSIUS));
-    }
-
     @Test
     public void GivenFarenheit_ShouldReturnCelsius() {
         double result = quantityMeasurement.convertFarenheightToCelsius(212.0);
         Assert.assertEquals(100.0,result,0.0);
+    }
+    @Test
+    public void givenValues_WhenNegative_ShouldThrowAnException() throws QuantityMeasurementException {
+        Unit gram = new Unit(-10.0, UnitVariation.GRAM);
+        Unit kilogram = new Unit(100.0, UnitVariation.KILOGRAM);
+        try {
+            quantityMeasurement.compare(gram, kilogram);
+        } catch (QuantityMeasurementException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
